@@ -1,0 +1,156 @@
+body {
+    background: #fdc6ff;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+
+.envelope {
+    position: relative;
+    width: 380px;
+    height: 250px;
+    max-width: 85vw;
+    flex-shrink: 0;
+    background: #e8c9a0;
+    border-radius: 5px;
+    cursor: pointer;
+    perspective: 1000px;
+    isolation: isolate;
+    overflow: visible;
+}
+
+
+.letter {
+    position: absolute;
+    left: 5%;
+    bottom: 5px;
+    width: 90%;
+    height: 220px;
+    box-sizing: border-box;
+    padding: 25px;
+    background: #fffaf0;
+    color: #333;
+    text-align: center;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    z-index: 1;
+    transform: translateY(0);
+    transition: transform 0.7s ease;
+}
+
+
+
+
+.flap {
+    position: absolute;
+    inset: 0;
+    background: #d4ad7c;
+    clip-path: polygon(0 0, 100% 0, 50% 55%);
+    transform-origin: top center;
+    transition: transform 0.6s ease;
+    z-index: 4;
+}
+
+
+.envelope:not(.open) .letter {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+.envelope.open .letter {
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(-190px);
+    z-index: 5;
+}
+
+
+.envelope.open .front {
+    z-index: 2;
+}
+
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 4;
+}
+
+
+@media (max-width: 450px) {
+    .envelope {
+        width: 300px;
+        height: 200px;
+    }
+
+    .envelope.open .letter {
+        transform: translateY(-155px);
+    }
+}
+
+
+.question {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.buttons button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+#yesBtn {
+    background: #ff6b9d;
+    color: white;
+}
+
+#noBtn {
+    background: #ddd;
+    color: #333;
+}
+
+#response {
+    margin-top: 15px;
+}
+
+#catContainer {
+    margin-top: 20px;
+    text-align: center;
+    animation: catPop 0.5s ease;
+}
+
+#catImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px #ff6b9d66;
+}
+
+@keyframes catPop {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
